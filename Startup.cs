@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using vega.Persistance;
 
 namespace vega
 {
@@ -28,11 +30,22 @@ namespace vega
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            services.AddDbContext<VegaDbContext>(options =>
+                                                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            var builder = new ConfigurationBuilder()
+                        .SetBasePath(env.ContentRootPath)
+                        .AddJsonFile("appsettings.json", optional: true)
+                        .AddJsonFile($"appsettings.{env.EnvironmentName}.json")
+                        .AddEnvironmentVariables();
+
             if (env.IsDevelopment())
             {
 
