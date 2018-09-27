@@ -40,15 +40,8 @@ namespace vega
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            var builder = new ConfigurationBuilder()
-                        .SetBasePath(env.ContentRootPath)
-                        .AddJsonFile("appsettings.json", optional: true)
-                        .AddJsonFile($"appsettings.{env.EnvironmentName}.json")
-                        .AddEnvironmentVariables();
-
             if (env.IsDevelopment())
             {
-
                 app.UseDeveloperExceptionPage();
             }
             else
