@@ -11,7 +11,9 @@ namespace vega.Models
         {
             Models = new List<Model>();
         }
+
         [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required]
         [StringLength(225)]

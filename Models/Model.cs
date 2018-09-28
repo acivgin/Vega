@@ -7,6 +7,7 @@ namespace vega.Models
     public class Model
     {
         [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required]
         [StringLength(225)]
