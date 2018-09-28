@@ -9,7 +9,6 @@ using vega.Persistance;
 
 namespace vega.Controllers
 {
-
     public class FeatureController : Controller
     {
         private readonly VegaDbContext _context;
